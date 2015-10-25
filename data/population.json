@@ -1,0 +1,626 @@
+[
+  {
+    "lsgi_code": "G_AR",
+    "pname": "Arikulam Grama Panchayat",
+    "total": 18378,
+    "male": 8651,
+    "female": 9727,
+    "sexratio": 1125
+  },
+  {
+    "lsgi_code": "G_AT",
+    "pname": "Atholi Grama Panchayat",
+    "total": 14613,
+    "male": 13061,
+    "female": 1552,
+    "sexratio": 119
+  },
+  {
+    "lsgi_code": "G_AY",
+    "pname": "Ayancheri Grama Panchayat",
+    "total": 26293,
+    "male": 12372,
+    "female": 13921,
+    "sexratio": 1126
+  },
+  {
+    "lsgi_code": "G_AZ",
+    "pname": "Azhiyur Grama Panchayat",
+    "total": 33023,
+    "male": 13595,
+    "female": 19428,
+    "sexratio": 1430
+  },
+  {
+    "lsgi_code": "G_BA",
+    "pname": "Balusseri Grama Panchayat",
+    "total": 27363,
+    "male": 12977,
+    "female": 14386,
+    "sexratio": 1109
+  },
+  {
+    "lsgi_code": "G_CK",
+    "pname": "Chakittapara Grama Panchayat",
+    "total": 21086,
+    "male": 10353,
+    "female": 10733,
+    "sexratio": 1037
+  },
+  {
+    "lsgi_code": "G_CA",
+    "pname": "Changaroth Grama Panchayat",
+    "total": 32107,
+    "male": 15302,
+    "female": 16805,
+    "sexratio": 1099
+  },
+  {
+    "lsgi_code": "G_CT",
+    "pname": "Chathamangalam Grama Panchayat",
+    "total": 16816,
+    "male": 8899,
+    "female": 7917,
+    "sexratio": 890
+  },
+  {
+    "lsgi_code": "G_CE",
+    "pname": "Chekkiad Grama Panchayat",
+    "total": 24842,
+    "male": 11190,
+    "female": 13652,
+    "sexratio": 1221
+  },
+  {
+    "lsgi_code": "G_CL",
+    "pname": "Chelannur Grama Panchayat",
+    "total": 40697,
+    "male": 19574,
+    "female": 21123,
+    "sexratio": 1080
+  },
+  {
+    "lsgi_code": "G_CN",
+    "pname": "Chemanachery Grama Panchayat",
+    "total": 34819,
+    "male": 16112,
+    "female": 18707,
+    "sexratio": 1162
+  },
+  {
+    "lsgi_code": "G_CG",
+    "pname": "Chengottukavu Grama Panchayat",
+    "total": 26791,
+    "male": 12446,
+    "female": 14345,
+    "sexratio": 1153
+  },
+  {
+    "lsgi_code": "G_CH",
+    "pname": "Cheruvannur Grama Panchayat",
+    "total": 23388,
+    "male": 11054,
+    "female": 12334,
+    "sexratio": 1116
+  },
+  {
+    "lsgi_code": "G_CR",
+    "pname": "Chorode Grama Panchayat",
+    "total": 38245,
+    "male": 17918,
+    "female": 20327,
+    "sexratio": 1135
+  },
+  {
+    "lsgi_code": "G_ED",
+    "pname": "Edacheri Grama Panchayat",
+    "total": 26819,
+    "male": 12368,
+    "female": 14451,
+    "sexratio": 1169
+  },
+  {
+    "lsgi_code": "G_ER",
+    "pname": "Eramala Grama Panchayat",
+    "total": 34658,
+    "male": 15858,
+    "female": 18800,
+    "sexratio": 1186
+  },
+  {
+    "lsgi_code": "G_FE",
+    "pname": "Feroke Grama Panchayat",
+    "total": 54074,
+    "male": 26101,
+    "female": 27973,
+    "sexratio": 1072
+  },
+  {
+    "lsgi_code": "G_KLD",
+    "pname": "Kadalundi Grama Panchayat",
+    "total": 42516,
+    "male": 20381,
+    "female": 22135,
+    "sexratio": 1087
+  },
+  {
+    "lsgi_code": "G_KD",
+    "pname": "Kakkodi Grama Panchayat",
+    "total": 42866,
+    "male": 20434,
+    "female": 22432,
+    "sexratio": 1098
+  },
+  {
+    "lsgi_code": "G_KK",
+    "pname": "Kakkur Grama Panchayat",
+    "total": 22788,
+    "male": 10696,
+    "female": 12092,
+    "sexratio": 1131
+  },
+  {
+    "lsgi_code": "G_KS",
+    "pname": "Karasseri Grama Panchayat",
+    "total": 31536,
+    "male": 15114,
+    "female": 16422,
+    "sexratio": 1087
+  },
+  {
+    "lsgi_code": "G_KP",
+    "pname": "Kattippara Grama Panchayat",
+    "total": 22706,
+    "male": 10897,
+    "female": 11809,
+    "sexratio": 1084
+  },
+  {
+    "lsgi_code": "G_KV",
+    "pname": "Kavilumpara Grama Panchayat",
+    "total": 22828,
+    "male": 11142,
+    "female": 11686,
+    "sexratio": 1049
+  },
+  {
+    "lsgi_code": "G_KA",
+    "pname": "Kayakkodi Grama Panchayat",
+    "total": 24578,
+    "male": 11627,
+    "female": 12951,
+    "sexratio": 1114
+  },
+  {
+    "lsgi_code": "G_KY",
+    "pname": "Kayanna Grama Panchayat",
+    "total": 13755,
+    "male": 6665,
+    "female": 7090,
+    "sexratio": 1064
+  },
+  {
+    "lsgi_code": "G_KE",
+    "pname": "Keezhariyur Grama Panchayat",
+    "total": 15116,
+    "male": 7061,
+    "female": 8055,
+    "sexratio": 1141
+  },
+  {
+    "lsgi_code": "G_KZ",
+    "pname": "Kizhakkoth Grama Panchayat",
+    "total": 31259,
+    "male": 14853,
+    "female": 16406,
+    "sexratio": 1105
+  },
+  {
+    "lsgi_code": "G_KC",
+    "pname": "Kodencheri Grama Panchayat",
+    "total": 34854,
+    "male": 17170,
+    "female": 17684,
+    "sexratio": 1030
+  },
+  {
+    "lsgi_code": "G_KH",
+    "pname": "Kodiyathur Grama Panchayat",
+    "total": 28335,
+    "male": 14013,
+    "female": 14322,
+    "sexratio": 1023
+  },
+  {
+    "lsgi_code": "G_KL",
+    "pname": "Koduvally Grama Panchayat",
+    "total": 30787,
+    "male": 14792,
+    "female": 15995,
+    "sexratio": 1082
+  },
+  {
+    "lsgi_code": "G_KN",
+    "pname": "Koodaranji Grama Panchayat",
+    "total": 18678,
+    "male": 9242,
+    "female": 9436,
+    "sexratio": 1021
+  },
+  {
+    "lsgi_code": "G_KR",
+    "pname": "Koorachundu Grama Panchayat",
+    "total": 17027,
+    "male": 8424,
+    "female": 8603,
+    "sexratio": 1022
+  },
+  {
+    "lsgi_code": "G_KO",
+    "pname": "Koothali Grama Panchayat",
+    "total": 11389,
+    "male": 5525,
+    "female": 5864,
+    "sexratio": 1062
+  },
+  {
+    "lsgi_code": "G_KOT",
+    "pname": "Kottur Grama Panchayat",
+    "total": 30982,
+    "male": 14832,
+    "female": 16150,
+    "sexratio": 1089
+  },
+  {
+    "lsgi_code": "M_KY",
+    "pname": "Koyilandi Muncipality",
+    "total": 71873,
+    "male": 33620,
+    "female": 38253,
+    "sexratio": 1138
+  },
+  {
+    "lsgi_code": "C_KD",
+    "pname": "Kozhikkode Corporation",
+    "total": 291252,
+    "male": 317972,
+    "female": 609224,
+    "sexratio": 1916
+  },
+  {
+    "lsgi_code": "G_KM",
+    "pname": "Kunnamangalam Grama Panchayat",
+    "total": 53223,
+    "male": 26833,
+    "female": 26390,
+    "sexratio": 984
+  },
+  {
+    "lsgi_code": "G_KU",
+    "pname": "Kunnummal Grama Panchayat",
+    "total": 18031,
+    "male": 8479,
+    "female": 9552,
+    "sexratio": 1127
+  },
+  {
+    "lsgi_code": "G_KVT",
+    "pname": "Kuruvattur Grama Panchayat",
+    "total": 34241,
+    "male": 16451,
+    "female": 17790,
+    "sexratio": 1082
+  },
+  {
+    "lsgi_code": "G_KT",
+    "pname": "Kuttiadi Grama Panchayat",
+    "total": 19351,
+    "male": 9100,
+    "female": 10251,
+    "sexratio": 1127
+  },
+  {
+    "lsgi_code": "G_MD",
+    "pname": "Madavoor Grama Panchayat",
+    "total": 28672,
+    "male": 13747,
+    "female": 14925,
+    "sexratio": 1086
+  },
+  {
+    "lsgi_code": "G_MN",
+    "pname": "Maniyur Grama Panchayat",
+    "total": 39961,
+    "male": 18849,
+    "female": 21112,
+    "sexratio": 1121
+  },
+  {
+    "lsgi_code": "G_MA",
+    "pname": "Maruthomkara Grama Panchayat",
+    "total": 19871,
+    "male": 9533,
+    "female": 10338,
+    "sexratio": 1085
+  },
+  {
+    "lsgi_code": "G_MV",
+    "pname": "Mavoor Grama Panchayat",
+    "total": 29781,
+    "male": 14431,
+    "female": 15350,
+    "sexratio": 1064
+  },
+  {
+    "lsgi_code": "G_ME",
+    "pname": "Meppayur Grama Panchayat",
+    "total": 27929,
+    "male": 13061,
+    "female": 14868,
+    "sexratio": 1139
+  },
+  {
+    "lsgi_code": "G_MO",
+    "pname": "Moodadi Grama Panchayat",
+    "total": 30170,
+    "male": 13910,
+    "female": 16260,
+    "sexratio": 1169
+  },
+  {
+    "lsgi_code": "G_MU",
+    "pname": "Mukkom Grama Panchayat",
+    "total": 25116,
+    "male": 12080,
+    "female": 13036,
+    "sexratio": 1080
+  },
+  {
+    "lsgi_code": "G_NA",
+    "pname": "Nadapuram Grama Panchayat",
+    "total": 40230,
+    "male": 18700,
+    "female": 21530,
+    "sexratio": 1152
+  },
+  {
+    "lsgi_code": "G_ND",
+    "pname": "Naduvannur Grama Panchayat",
+    "total": 25979,
+    "male": 12260,
+    "female": 13719,
+    "sexratio": 1120
+  },
+  {
+    "lsgi_code": "G_NN",
+    "pname": "Nanmanda Grama Panchayat",
+    "total": 27316,
+    "male": 12910,
+    "female": 14406,
+    "sexratio": 1116
+  },
+  {
+    "lsgi_code": "G_NI",
+    "pname": "Narikunni Grama Panchayat",
+    "total": 24290,
+    "male": 11596,
+    "female": 12694,
+    "sexratio": 1095
+  },
+  {
+    "lsgi_code": "G_NR",
+    "pname": "Naripetta Grama Panchayat",
+    "total": 26529,
+    "male": 12625,
+    "female": 13904,
+    "sexratio": 1102
+  },
+  {
+    "lsgi_code": "G_NO",
+    "pname": "Nochad Grama Panchayat",
+    "total": 26857,
+    "male": 12815,
+    "female": 14042,
+    "sexratio": 1096
+  },
+  {
+    "lsgi_code": "G_OL",
+    "pname": "Olavanna Grama Panchayat",
+    "total": 68432,
+    "male": 33625,
+    "female": 34807,
+    "sexratio": 1036
+  },
+  {
+    "lsgi_code": "G_OM",
+    "pname": "Omassery Grama Panchayat",
+    "total": 35009,
+    "male": 16764,
+    "female": 18245,
+    "sexratio": 1089
+  },
+  {
+    "lsgi_code": "G_ON",
+    "pname": "Onchiyam Grama Panchayat",
+    "total": 28650,
+    "male": 13224,
+    "female": 15426,
+    "sexratio": 1167
+  },
+  {
+    "lsgi_code": "G_PN",
+    "pname": "Panangad Grama Panchayat",
+    "total": 14347,
+    "male": 6891,
+    "female": 7456,
+    "sexratio": 1082
+  },
+  {
+    "lsgi_code": "G_PA",
+    "pname": "Payyoli Grama Panchayat",
+    "total": 25894,
+    "male": 12139,
+    "female": 13755,
+    "sexratio": 1134
+  },
+  {
+    "lsgi_code": "G_PE",
+    "pname": "Perambra Grama Panchayat",
+    "total": 32784,
+    "male": 15673,
+    "female": 17111,
+    "sexratio": 1092
+  },
+  {
+    "lsgi_code": "G_PM",
+    "pname": "Perumanna Grama Panchayat",
+    "total": 35460,
+    "male": 17479,
+    "female": 17981,
+    "sexratio": 1029
+  },
+  {
+    "lsgi_code": "G_PR",
+    "pname": "Peruvayal Grama Panchayat",
+    "total": 47700,
+    "male": 23333,
+    "female": 24367,
+    "sexratio": 1045
+  },
+  {
+    "lsgi_code": "G_PU",
+    "pname": "Purameri Grama Panchayat",
+    "total": 27612,
+    "male": 12743,
+    "female": 14869,
+    "sexratio": 1167
+  },
+  {
+    "lsgi_code": "G_PD",
+    "pname": "Puthuppady Grama Panchayat",
+    "total": 42083,
+    "male": 20148,
+    "female": 21935,
+    "sexratio": 1089
+  },
+  {
+    "lsgi_code": "G_RA",
+    "pname": "Ramanattukara Grama Panchayat",
+    "total": 35937,
+    "male": 17574,
+    "female": 18363,
+    "sexratio": 1045
+  },
+  {
+    "lsgi_code": "G_TA",
+    "pname": "Thalakulathur Grama Panchayat",
+    "total": 29388,
+    "male": 13753,
+    "female": 15635,
+    "sexratio": 1137
+  },
+  {
+    "lsgi_code": "G_TM",
+    "pname": "Thamarasseri Grama Panchayat",
+    "total": 35706,
+    "male": 17053,
+    "female": 18653,
+    "sexratio": 1094
+  },
+  {
+    "lsgi_code": "G_TI",
+    "pname": "Thikkodi Grama Panchayat",
+    "total": 27051,
+    "male": 12334,
+    "female": 14717,
+    "sexratio": 1194
+  },
+  {
+    "lsgi_code": "G_TH",
+    "pname": "Thiruvallur Grama Panchayat",
+    "total": 21169,
+    "male": 9961,
+    "female": 11208,
+    "sexratio": 1126
+  },
+  {
+    "lsgi_code": "G_TV",
+    "pname": "Thiruvambadi Grama Panchayat",
+    "total": 28820,
+    "male": 13988,
+    "female": 14832,
+    "sexratio": 1061
+  },
+  {
+    "lsgi_code": "G_TU",
+    "pname": "Thuneri Grama Panchayat",
+    "total": 23421,
+    "male": 10693,
+    "female": 12728,
+    "sexratio": 1191
+  },
+  {
+    "lsgi_code": "G_TR",
+    "pname": "Thurayur Grama Panchayat",
+    "total": 14176,
+    "male": 6531,
+    "female": 7645,
+    "sexratio": 1171
+  },
+  {
+    "lsgi_code": "G_UL",
+    "pname": "Ulliyeri Grama Panchayat",
+    "total": 32509,
+    "male": 15285,
+    "female": 17224,
+    "sexratio": 1127
+  },
+  {
+    "lsgi_code": "G_UN",
+    "pname": "Unnikulum Grama Panchayat",
+    "total": 49348,
+    "male": 23438,
+    "female": 25910,
+    "sexratio": 1106
+  },
+  {
+    "lsgi_code": "M_VD",
+    "pname": "Vadakara Muncipality",
+    "total": 131576,
+    "male": 60595,
+    "female": 70981,
+    "sexratio": 1172
+  },
+  {
+    "lsgi_code": "G_VA",
+    "pname": "Valayam Grama Panchayat",
+    "total": 14328,
+    "male": 6801,
+    "female": 7527,
+    "sexratio": 1107
+  },
+  {
+    "lsgi_code": "G_AN",
+    "pname": "Vanimel Grama Panchayat",
+    "total": 25412,
+    "male": 12300,
+    "female": 13112,
+    "sexratio": 1067
+  },
+  {
+    "lsgi_code": "G_VE",
+    "pname": "Velom Grama Panchayat",
+    "total": 26738,
+    "male": 12761,
+    "female": 13977,
+    "sexratio": 1096
+  },
+  {
+    "lsgi_code": "G_VI",
+    "pname": "Villiyappally Grama Panchayat",
+    "total": 34502,
+    "male": 15948,
+    "female": 18554,
+    "sexratio": 1164
+  }
+]
