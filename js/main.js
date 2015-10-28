@@ -65,10 +65,22 @@
         }
     };
 
+    function fundfetch(){
+        if(funds[currMap]){
+            fundrender();
+        } else {
+            d3.json('data/funds/' + currMap + '.json', function(d){
+                funds[currMap] = d;
+                fundrender();
+            });
+        }
+    }
+
     var vis = d3.select('.map').append('svg')
         .attr('width', width).attr('height', height);
 
     function fetchInit() {
+        mapfetch(currMap, currYear);
         d3.json('data/population.json', function(d) {
             for (var i = 0; i < d.length; i++) {
                 populations[d[i]['lsgi_code']] = d[i];
@@ -128,6 +140,7 @@
         currPlace = getcode(d);
         d3.select('.areaInfo').text(currPlace+'<br>'+getAreaInfo(currPlace));
         resultfetch();
+        fundfetch();
     }
 
     function getcode(d) {
@@ -283,6 +296,30 @@
         }
     };
 
+    function fundrender(){
+        var infralist = funds[currMap][currPlace][0];
+        infralist.unshift('infra');
+        var chart = c3.generate({
+            bindto: '.fund',
+            data: {
+                x: 'x',
+                columns: [
+                    ['x', '2012-1-1', '2013-1-1', '2014-1-1'],
+                    infralist
+                ]
+            },
+            axis: {
+                x: {
+                    type: 'timeseries',
+                    tick: {
+                        format: '%Y'
+                    }
+                }
+            }
+        });
+        // chart.load();
+    };
+
     function getAreaInfo(code) {
         if(populations[code]){
             var info = populations[code];
@@ -330,10 +367,10 @@
         var mapyear = classes[classes.length - 1];
         currYear = mapyear;
         mapfetch(currMap, currYear);
+        resultfetch();
     });
     (function init(){
         $('.content').hide();
         fetchInit();
-        mapfetch(currMap, currYear);
     })();
 })();
