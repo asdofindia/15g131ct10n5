@@ -5,38 +5,37 @@
     evt.initCustomEvent( event, params.bubbles, params.cancelable, params.detail );
     return evt;
    }
-
   CustomEvent.prototype = window.Event.prototype;
-
   window.CustomEvent = CustomEvent;
 })();
 
 (function(){
-    var popdata = {};
+    var populations = {};
     var maps = {};
     var results = {};
+    var funds = {};
+    var codes = {};
+
     var width = 800;
     var height = 500;
+
     var pie = {};
 
-    var mapyear = 10;
+    var currMap = "gp";
+    var currYear = "10";
 
-    var currState = "gp05";
-
-    function mapfetch(url, mapname) {
-        d3.json(url, function(d) {
-            maps[mapname] = d;
-            if(mapname === "gp10"){
-                console.log('map loaded. event should fire');
+    function mapfetch(mapname) {
+        if(maps[mapname]){
+            var maploadevent = new CustomEvent("gpmaploaded");
+            document.dispatchEvent(maploadevent);
+        } else {
+            d3.json("data/"+mapname+".geojson", function(d) {
+                maps[mapname] = d;
                 var maploadevent = new CustomEvent("gpmaploaded");
                 document.dispatchEvent(maploadevent);
-            }
-        });
+            });
+        }
     };
-
-    mapfetch("data/local_authorities_2010.geojson", "gp10");
-    mapfetch("data/block_panchayats_2010.geojson", "bp10");
-    mapfetch("data/district_panchayat_2010.geojson", "dp10");
 
     function resultfetch(url, resultname) {
         d3.json(url, function(d){
@@ -61,7 +60,7 @@
 
     d3.json("data/population.json", function(d) {
         for (var i = 0; i < d.length; i++) {
-            popdata[d[i]['lsgi_code']] = d[i];
+            populations[d[i]['lsgi_code']] = d[i];
         }
     });
 
@@ -104,9 +103,17 @@
     };
 
     function clicked(d) {
-        var code = d.properties['lsgi_code'];
+        var code = getcode(d);
         d3.select('.areaInfo').text(getAreaInfo(code));
         resultPi(code);
+    }
+
+    function getcode(d) {
+        if (d.properties['lsgi_code']){
+            return d.properties['lsgi_code'];
+        } else {
+            return "NA"
+        }
     }
 
     /* This large function creates the pi */
@@ -115,7 +122,7 @@
             pie.destroy();
         }
         console.log(code);
-        var result = results[currState];
+        var result = results[currMap+currYear];
         var ourResult = result[code];
         console.log(ourResult);
         var content = [];
@@ -243,20 +250,37 @@
     };
 
     function getAreaInfo(code) {
-        var info = popdata[code];
+        if(populations[code]){
+            var info = populations[code];
+        } else {
+            console.log('undefined pop');
+            var info = "Could not find data";
+        }
         return 'population = '+info['total'];
     }
 
     document.addEventListener('gpmaploaded', function(e) {
         console.log("event fired. Map will be created");
-        mapcreator(maps["gp10"]);
+        mapcreator(maps[currMap+currYear]);
+        $('.loading').hide();
+        $('.content').show();
     });
     $('.mapchooser').on('click', function(e){
         e.preventDefault();
-        mapcreator(maps[getmapname(this)]);
+        var classes = this.className.split(' ');
+        var maptype = classes[classes.length - 1];
+        currMap = maptype;
+        mapfetch(currMap+currYear);
     });
-    function getmapname(obj){
-        var classes = obj.className.split(' ');
-        return classes[classes.length - 1]+mapyear.toString();
-    }
+    $('.yearchooser').on('click', function(e){
+        e.preventDefault();
+        var classes = this.className.split(' ');
+        var mapyear = classes[classes.length - 1];
+        currYear = mapyear;
+        mapfetch(currMap+currYear);
+    });
+    (function init(){
+        $('.content').hide();
+        mapfetch(currMap+currYear);
+    })();
 })();
