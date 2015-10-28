@@ -1,12 +1,12 @@
 (function () {
-  function CustomEvent ( event, params ) {
-    params = params || { bubbles: false, cancelable: false, detail: undefined };
-    var evt = document.createEvent( 'CustomEvent' );
-    evt.initCustomEvent( event, params.bubbles, params.cancelable, params.detail );
-    return evt;
-   }
-  CustomEvent.prototype = window.Event.prototype;
-  window.CustomEvent = CustomEvent;
+    function CustomEvent ( event, params ) {
+        params = params || { bubbles: false, cancelable: false, detail: undefined };
+        var evt = document.createEvent( 'CustomEvent' );
+        evt.initCustomEvent( event, params.bubbles, params.cancelable, params.detail );
+        return evt;
+    }
+    CustomEvent.prototype = window.Event.prototype;
+    window.CustomEvent = CustomEvent;
 })();
 
 (function(){
@@ -15,55 +15,76 @@
     var results = {};
     var funds = {};
     var codes = {};
+    var reverseCodes = {};
 
     var width = 800;
     var height = 500;
 
     var pie = {};
 
-    var currMap = "gp";
-    var currYear = "2010";
+    var currMap = 'gp';
+    var currYear = '2010';
+    var currPlace = null;
 
     function mapfetch(maptype, mapyear) {
         var mapname = maptype + mapyear;
         if(maps[mapname]){
-            var maploadevent = new CustomEvent("gpmaploaded");
+            var maploadevent = new CustomEvent('gpmaploaded');
             document.dispatchEvent(maploadevent);
         } else {
-            d3.json("data/maps/"+ mapyear + "/" + maptype + ".geojson", function(d) {
+            d3.json('data/maps/' + mapyear + '/' + maptype + '.geojson', function(d) {
                 maps[mapname] = d;
-                var maploadevent = new CustomEvent("gpmaploaded");
+                var maploadevent = new CustomEvent('gpmaploaded');
                 document.dispatchEvent(maploadevent);
+            });
+        }
+    }
+
+    function resultfetch() {
+        var resultname = currMap + currYear;
+        if(results[resultname]){
+            resultPi();
+        } else {
+            d3.csv('data/results/' + currYear + '/' + currMap + '.csv', function(d){
+                results[resultname] = {};
+                console.log(d);
+                for(var i = 0; i < d.length; i++) {
+                    var code = guessAreaCode(d[i]["area"], currMap.slice(0,1).toUpperCase());
+                    results[resultname][code] = results[resultname][code] || {};
+                    if(typeof results[resultname][code][d[i]["party"]] != 'undefined') {
+                        results[resultname][code][d[i]["party"]] = results[resultname][code][d[i]["party"]] + 1;
+                    } else {
+                        results[resultname][code][d[i]["party"]] = 1;
+                    }
+                    // console.log(results[resultname][code]);
+                    // console.log(results[resultname][code][d[i]["party"]]);
+                }
+                // console.log(results[resultname]);
+                resultPi();
             });
         }
     };
 
-    function resultfetch(url, resultname) {
-        d3.json(url, function(d){
-            results[resultname] = d;
+    var vis = d3.select('.map').append('svg')
+        .attr('width', width).attr('height', height);
+
+    function fetchInit() {
+        d3.json('data/population.json', function(d) {
+            for (var i = 0; i < d.length; i++) {
+                populations[d[i]['lsgi_code']] = d[i];
+            }
         });
-    };
-
-    // var resultyears = ["05", "10"];
-    // var resulttypes = ["gp", "bp", "dp"];
-    var resultyears = ["05"];
-    var resulttypes = ["gp"];
-
-    $.each(resultyears, function(index, yearvalue){
-        $.each(resulttypes, function(typeindex, typevalue){
-            var resultname = typevalue+yearvalue;
-            resultfetch("data/"+resultname+".json", resultname);
+        d3.json('data/codes.json', function(d){
+            codes = d;
+            for(var code in codes) {
+                var englishnames = codes[code]["en"];
+                englishnames.forEach(function(engname){
+                    reverseCodes[code.slice(0,1).toUpperCase()+engname] = code;
+                });
+            }
+            console.log(reverseCodes);
         });
-    });
-
-    var vis = d3.select(".map").append("svg")
-        .attr("width", width).attr("height", height);
-
-    d3.json("data/population.json", function(d) {
-        for (var i = 0; i < d.length; i++) {
-            populations[d[i]['lsgi_code']] = d[i];
-        }
-    });
+    }
 
     function mapcreator(map) {
         // console.log(map);
@@ -74,27 +95,27 @@
         var transl = [((width - scale * (bounds[1][0] + bounds[0][0])) / 2) - 150, (height - scale * (bounds[1][1] + bounds[0][1])) / 2];
         projection.scale(scale).translate(transl);
 
-        var mapfeatures = vis.selectAll("path").data(map.features);
+        var mapfeatures = vis.selectAll('path').data(map.features);
 
         mapfeatures
             .enter()
-                .append("path")
-                .attr("d", path)
-                .attr("class", "area")
-                .attr("id", function(d) {
+                .append('path')
+                .attr('d', path)
+                .attr('class', 'area')
+                .attr('id', function(d) {
                     return d.properties['lsgi_code']
                 })
-                .attr("title", function(d) {
+                .attr('title', function(d) {
                     return d.properties['PANCHAYAT']
                 })
-                .on("click", clicked);
+                .on('click', clicked);
 
         mapfeatures
-            .attr("d", path)
-            .attr("id", function(d){
+            .attr('d', path)
+            .attr('id', function(d){
                 return d.properties['lsgi_code']
             })
-            .attr("title", function(d) {
+            .attr('title', function(d) {
                 return d.properties['PANCHAYAT']
             });
 
@@ -104,159 +125,161 @@
     };
 
     function clicked(d) {
-        var code = getcode(d);
-        d3.select('.areaInfo').text(getAreaInfo(code));
-        resultPi(code);
+        currPlace = getcode(d);
+        d3.select('.areaInfo').text(currPlace+'<br>'+getAreaInfo(currPlace));
+        resultfetch();
     }
 
     function getcode(d) {
+        var guess = guessAreaCode(d['PANCHAYAT'], currMap.slice(0,1).toUpperCase());
+        if(guess!="FAIL"){
+            return guess
+        }
         if (d.properties['lsgi_code']){
             return d.properties['lsgi_code'];
         } else {
-            return "NA"
+            return 'NA'
         }
     }
 
     /* This large function creates the pi */
-    function resultPi(code){
+    function resultPi(){
         if(pie.destroy){
             pie.destroy();
         }
-        console.log(code);
         var result = results[currMap+currYear];
-        var ourResult = result[code];
-        console.log(ourResult);
+        var ourResult = result[currPlace];
         var content = [];
         var totalseats = 0;
         for(var key in ourResult){
             if (ourResult.hasOwnProperty(key)){
                 var value = ourResult[key];
                 var pieobj = {}
-                pieobj["label"] = key;
-                pieobj["value"] = value;
+                pieobj['label'] = key;
+                pieobj['value'] = value;
                 totalseats = totalseats + value;
-                pieobj["color"] = partyColor(key);
+                pieobj['color'] = partyColor(key);
                 content.push(pieobj);
             }
         }
-        console.log(content);
-        pie = new d3pie("pieChart", {
-            "header": {
-        		"title": {
-        			"text": "SEATS",
-        			"fontSize": 22,
-        			"font": "verdana"
-        		},
-        		"subtitle": {
-        			"text": "TOTAL SEATS WON BY EACH PARTY",
-        			"color": "#999999",
-        			"fontSize": 10,
-        			"font": "verdana"
-        		},
-        		"titleSubtitlePadding": 12
-        	},"footer": {
-        		"text": "TOTAL : "+totalseats.toString(),
-        		"color": "#999999",
-        		"fontSize": 11,
-        		"font": "open sans",
-        		"location": "bottom-center"
-        	},
-        	"size": {
-        		"canvasHeight": 400,
-        		"canvasWidth": 590,
-        		"pieInnerRadius": "49%",
-        		"pieOuterRadius": "88%"
-        	},
-        	"data": {
-        		"smallSegmentGrouping": {
-        			"enabled": true,
-        			"value": 0,
-        			"color": "#000000"
-        		},
-        		"content": content
-        	},
-        	"labels": {
-        		"outer": {
-        			"format": "label-percentage1",
-        			"pieDistance": 32
-        		},
-        		"inner": {
-        			"format": "value"
-        		},
-        		"mainLabel": {
-        			"font": "verdana"
-        		},
-        		"percentage": {
-        			"color": "#e1e1e1",
-        			"font": "verdana",
-        			"decimalPlaces": 0
-        		},
-        		"value": {
-        			"color": "#e1e1e1",
-        			"font": "verdana"
-        		},
-        		"lines": {
-        			"enabled": true,
-        			"style": "straight"
-        		},
-        		"truncation": {
-        			"enabled": true
-        		}
-        	},
-        	"tooltips": {
-        		"enabled": true,
-        		"type": "placeholder",
-        		"string": "{label}: {value}, {percentage}%"
-        	},
-        	"effects": {
-        		"pullOutSegmentOnClick": {
-        			"effect": "linear",
-        			"speed": 400,
-        			"size": 8
-        		}
-        	},
-        	"misc": {
-        		"colors": {
-        			"background": "#ffffff"
-        		}
-        	}
+        // console.log(content);
+        pie = new d3pie('pieChart', {
+            'header': {
+                'title': {
+                    'text': 'SEATS',
+                    'fontSize': 22,
+                    'font': 'verdana'
+                },
+                'subtitle': {
+                    'text': 'TOTAL SEATS WON BY EACH PARTY',
+                    'color': '#999999',
+                    'fontSize': 10,
+                    'font': 'verdana'
+                },
+                'titleSubtitlePadding': 12
+            },'footer': {
+                'text': 'TOTAL : '+totalseats.toString(),
+                'color': '#999999',
+                'fontSize': 11,
+                'font': 'open sans',
+                'location': 'bottom-center'
+            },
+            'size': {
+                'canvasHeight': 400,
+                'canvasWidth': 590,
+                'pieInnerRadius': '49%',
+                'pieOuterRadius': '88%'
+            },
+            'data': {
+                'smallSegmentGrouping': {
+                    'enabled': true,
+                    'value': 0,
+                    'color': '#000000'
+                },
+                'content': content
+            },
+            'labels': {
+                'outer': {
+                    'format': 'label-percentage1',
+                    'pieDistance': 32
+                },
+                'inner': {
+                    'format': 'value'
+                },
+                'mainLabel': {
+                    'font': 'verdana'
+                },
+                'percentage': {
+                    'color': '#e1e1e1',
+                    'font': 'verdana',
+                    'decimalPlaces': 0
+                },
+                'value': {
+                    'color': '#e1e1e1',
+                    'font': 'verdana'
+                },
+                'lines': {
+                    'enabled': true,
+                    'style': 'straight'
+                },
+                'truncation': {
+                    'enabled': true
+                }
+            },
+            'tooltips': {
+                'enabled': true,
+                'type': 'placeholder',
+                'string': '{label}: {value}, {percentage}%'
+            },
+            'effects': {
+                'pullOutSegmentOnClick': {
+                    'effect': 'linear',
+                    'speed': 400,
+                    'size': 8
+                }
+            },
+            'misc': {
+                'colors': {
+                    'background': '#ffffff'
+                }
+            }
         });
     };
 
     function partyColor(party){
         switch(party){
-            case "CPI(M)":
-                return("#fe0000");
-            case "CPI":
-                return("#eb8091");
-            case "INC":
-                return("#1bb7d8");
-            case "BJP":
-                return("#ff6400");
-            case "INDEPENDENT":
-                return("#ffdc00");
-            case "ML":
-                return("#36bc33");
-            case "NCP":
-                return("#de8be2");
-            case "SJ(D)":
-                return("#81d995");
-            case "KC(M)":
-                return("#08fad2");
-            case "JD(S)":
-                return("#bca21f");
-            case "N/A":
-                return("#efefef");
-            case "CONG(S)":
-                return "#9d3737";
-            case "DIC(K)":
-                return "#386a7e";
-            case "JSS":
-                return "#e260c7";
-            case "KC(S)":
-                return "#722df3";
+            case 'CPI(M)':
+                return '#fe0000';
+            case 'CPI':
+                return '#eb8091';
+            case 'INC':
+                return '#1bb7d8';
+            case 'BJP':
+                return '#ff6400';
+            case 'INDEPENDENT':
+                return '#ffdc00';
+            case 'ML':
+                return '#36bc33';
+            case 'NCP':
+                return '#de8be2';
+            case 'SJ(D)':
+                return '#81d995';
+            case 'KC(M)':
+                return '#08fad2';
+            case 'JD(S)':
+                return '#bca21f';
+            case 'N/A':
+                return '#efefef';
+            case 'CONG(S)':
+                return '#9d3737';
+            case 'DIC(K)':
+                return '#386a7e';
+            case 'JSS':
+                return '#e260c7';
+            case 'KC(S)':
+                return '#722df3';
             default:
-                return("#000000");
+                return('#000000');
         }
     };
 
@@ -265,13 +288,31 @@
             var info = populations[code];
         } else {
             console.log('undefined pop');
-            var info = "Could not find data";
+            var info = 'Could not find data';
         }
         return 'population = '+info['total'];
     }
 
+    function guessAreaCode(areaName, areaType) {
+        // console.log(codes);
+        // $.each(codes, function(code, names){
+        //     console.log(code.slice(0,1)+areaType);
+        //     if(code.slice(0,1)===areaType) {
+        //         if(names["en"].indexOf(areaName) > -1){
+        //             return code;
+        //         }
+        //     }
+        // });
+        if (reverseCodes[areaType + areaName] != undefined) {
+            return reverseCodes[areaType + areaName];
+        } else {
+            console.log('failed to find ' + areaName + ' in codes');
+            return "FAIL";
+        }
+    }
+
     document.addEventListener('gpmaploaded', function(e) {
-        console.log("event fired. Map will be created");
+        console.log('event fired. Map will be created');
         mapcreator(maps[currMap+currYear]);
         $('.loading').hide();
         $('.content').show();
@@ -292,6 +333,7 @@
     });
     (function init(){
         $('.content').hide();
+        fetchInit();
         mapfetch(currMap, currYear);
     })();
 })();
