@@ -22,14 +22,15 @@
     var pie = {};
 
     var currMap = "gp";
-    var currYear = "10";
+    var currYear = "2010";
 
-    function mapfetch(mapname) {
+    function mapfetch(maptype, mapyear) {
+        var mapname = maptype + mapyear;
         if(maps[mapname]){
             var maploadevent = new CustomEvent("gpmaploaded");
             document.dispatchEvent(maploadevent);
         } else {
-            d3.json("data/"+mapname+".geojson", function(d) {
+            d3.json("data/maps/"+ mapyear + "/" + maptype + ".geojson", function(d) {
                 maps[mapname] = d;
                 var maploadevent = new CustomEvent("gpmaploaded");
                 document.dispatchEvent(maploadevent);
@@ -244,6 +245,16 @@
                 return("#08fad2");
             case "JD(S)":
                 return("#bca21f");
+            case "N/A":
+                return("#efefef");
+            case "CONG(S)":
+                return "#9d3737";
+            case "DIC(K)":
+                return "#386a7e";
+            case "JSS":
+                return "#e260c7";
+            case "KC(S)":
+                return "#722df3";
             default:
                 return("#000000");
         }
@@ -270,17 +281,17 @@
         var classes = this.className.split(' ');
         var maptype = classes[classes.length - 1];
         currMap = maptype;
-        mapfetch(currMap+currYear);
+        mapfetch(currMap, currYear);
     });
     $('.yearchooser').on('click', function(e){
         e.preventDefault();
         var classes = this.className.split(' ');
         var mapyear = classes[classes.length - 1];
         currYear = mapyear;
-        mapfetch(currMap+currYear);
+        mapfetch(currMap, currYear);
     });
     (function init(){
         $('.content').hide();
-        mapfetch(currMap+currYear);
+        mapfetch(currMap, currYear);
     })();
 })();
