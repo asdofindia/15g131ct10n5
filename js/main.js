@@ -138,9 +138,17 @@
 
     function clicked(d) {
         currPlace = getcode(d);
-        d3.select('.areaInfo').text(currPlace+'<br>'+getAreaInfo(currPlace));
+        console.log("setting currPlace as " + currPlace);
+        setAreaInfo();
         resultfetch();
         fundfetch();
+    }
+
+    function setAreaInfo() {
+        // d3.select('.areaInfo').text(currPlace+'<br>'+getAreaInfo(currPlace));
+        d3.select('#areaNameEn').text(codes[currPlace]["en"][0]);
+        d3.select('#areaNameMl').text(codes[currPlace]["ml"][0]);
+        d3.select('#population').text(getAreaInfo(currPlace));
     }
 
     function getcode(d) {
@@ -297,22 +305,37 @@
     };
 
     function fundrender(){
+        console.log("currMap is " + currMap);
+        console.log(funds[currMap]);
         var infralist = funds[currMap][currPlace][0];
-        infralist.unshift('infra');
+        infralist.unshift('Infrastructure');
+        var prodlist = funds[currMap][currPlace][1];
+        prodlist.unshift('Productive');
+        var servlist = funds[currMap][currPlace][2];
+        servlist.unshift('Service');
         var chart = c3.generate({
-            bindto: '.fund',
+            bindto: '#fundChart',
             data: {
-                x: 'x',
                 columns: [
-                    ['x', '2012-1-1', '2013-1-1', '2014-1-1'],
-                    infralist
-                ]
+                    infralist,
+                    prodlist,
+                    servlist
+                ],
+                types: {
+                    Infrastructure: 'bar',
+                    Productive: 'bar',
+                    Service: 'bar'
+                }
             },
             axis: {
                 x: {
-                    type: 'timeseries',
-                    tick: {
-                        format: '%Y'
+                    type: 'category',
+                    categories: ['2012', '2013', '2014']
+                },
+                y: {
+                    label: {
+                        text: 'Fund spent (in lakhs?)',
+                        position: 'outer-middle'
                     }
                 }
             }

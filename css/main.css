@@ -8,6 +8,13 @@ path.area:hover {
     fill: #ccc;
 }
 
+.fund {
+    min-height: 500px;
+}
+
+#fundChart .c3-line {
+    stroke-width: 3px;
+}
 
 
 /* tips css */
