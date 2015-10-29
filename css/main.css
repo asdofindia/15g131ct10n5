@@ -8,6 +8,10 @@ path.area:hover {
     fill: #ccc;
 }
 
+button.selectedChooser {
+    background-color: blue;
+}
+
 .fund {
     min-height: 500px;
 }

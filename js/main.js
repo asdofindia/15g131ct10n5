@@ -382,6 +382,7 @@
         var classes = this.className.split(' ');
         var maptype = classes[classes.length - 1];
         currMap = maptype;
+        selectionUpdate();
         mapfetch(currMap, currYear);
     });
     $('.yearchooser').on('click', function(e){
@@ -389,9 +390,17 @@
         var classes = this.className.split(' ');
         var mapyear = classes[classes.length - 1];
         currYear = mapyear;
+        selectionUpdate();
         mapfetch(currMap, currYear);
         resultfetch();
     });
+
+    function selectionUpdate(){
+        $('.selectedChooser').removeClass('selectedChooser');
+        $('.' + currYear).addClass('selectedChooser');
+        $('.' + currMap).addClass('selectedChooser');
+    }
+
     (function init(){
         $('.content').hide();
         fetchInit();
