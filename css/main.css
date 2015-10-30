@@ -1,11 +1,19 @@
 path.area {
-    fill: none;
+    fill: cyan;
     stroke: #000;
     pointer-events: all;
 }
 
 path.area:hover {
-    fill: #ccc;
+    fill: blue;
+}
+
+path.area.disabled {
+    fill: grey;
+}
+
+path.area.disabled:hover {
+    fill: grey;
 }
 
 button.selectedChooser {

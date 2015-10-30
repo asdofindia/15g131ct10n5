@@ -32,7 +32,7 @@
             var maploadevent = new CustomEvent('gpmaploaded');
             document.dispatchEvent(maploadevent);
         } else {
-            d3.json('data/maps/' + mapyear + '/' + maptype + '.geojson', function(d) {
+            d3.json('data/maps/' + mapyear + '/' + maptype + '.geojson' + '?' + Math.floor(Math.random() * 1000), function(d) {
                 maps[mapname] = d;
                 var maploadevent = new CustomEvent('gpmaploaded');
                 document.dispatchEvent(maploadevent);
@@ -45,9 +45,9 @@
         if(results[resultname]){
             resultPi();
         } else {
-            d3.csv('data/results/' + currYear + '/' + currMap + '.csv', function(d){
+            d3.csv('data/results/' + currYear + '/' + currMap + '.csv' + '?' + Math.floor(Math.random() * 1000), function(d){
                 results[resultname] = {};
-                console.log(d);
+                // console.log(d);
                 for(var i = 0; i < d.length; i++) {
                     var code = guessAreaCode(d[i]["area"], currMap.slice(0,1).toUpperCase());
                     results[resultname][code] = results[resultname][code] || {};
@@ -69,8 +69,10 @@
         if(funds[currMap]){
             fundrender();
         } else {
-            d3.json('data/funds/' + currMap + '.json', function(d){
+            d3.json('data/funds/' + currMap + '.json' + '?' + Math.floor(Math.random() * 1000), function(d){
+                // console.log(d);
                 funds[currMap] = d;
+                // console.log(funds[currMap]);
                 fundrender();
             });
         }
@@ -81,12 +83,12 @@
 
     function fetchInit() {
         mapfetch(currMap, currYear);
-        d3.json('data/population.json', function(d) {
+        d3.json('data/population.json' + '?' + Math.floor(Math.random() * 1000), function(d) {
             for (var i = 0; i < d.length; i++) {
                 populations[d[i]['lsgi_code']] = d[i];
             }
         });
-        d3.json('data/codes.json', function(d){
+        d3.json('data/codes.json' + '?' + Math.floor(Math.random() * 1000), function(d){
             codes = d;
             for(var code in codes) {
                 var englishnames = codes[code]["en"];
@@ -94,8 +96,9 @@
                     reverseCodes[code.slice(0,1).toUpperCase()+engname] = code;
                 });
             }
-            console.log(reverseCodes);
+            // console.log(reverseCodes);
         });
+        selectionUpdate();
     }
 
     function mapcreator(map) {
@@ -113,7 +116,16 @@
             .enter()
                 .append('path')
                 .attr('d', path)
-                .attr('class', 'area')
+                .attr('class', function(d) {
+                    var areaShortCode = d.properties['lsgi_code'].slice(0,1);
+                    // console.log(areaShortCode + ' ' + currMap);
+                    if (areaShortCode === 'M') {
+                        if (currMap !='gp') {
+                            return 'area disabled';
+                        }
+                    }
+                    return 'area';
+                })
                 .attr('id', function(d) {
                     return d.properties['lsgi_code']
                 })
@@ -124,6 +136,16 @@
 
         mapfeatures
             .attr('d', path)
+            .attr('class', function(d) {
+                var areaShortCode = d.properties['lsgi_code'].slice(0,1);
+                // console.log(areaShortCode + ' ' + currMap);
+                if (areaShortCode === 'M') {
+                    if (currMap !='gp') {
+                        return 'area disabled';
+                    }
+                }
+                return 'area';
+            })
             .attr('id', function(d){
                 return d.properties['lsgi_code']
             })
@@ -136,9 +158,22 @@
                 .remove();
     };
 
+    function isDisabled(lsgi) {
+        var areaShortCode = lsgi.slice(0,1);
+        if (areaShortCode === 'M') {
+            if (currMap !='gp') {
+                return true;
+            }
+        }
+        return false;
+    }
+
     function clicked(d) {
+        if (isDisabled(d.properties['lsgi_code'])) {
+            return;
+        }
         currPlace = getcode(d);
-        console.log("setting currPlace as " + currPlace);
+        // console.log("setting currPlace as " + currPlace);
         setAreaInfo();
         resultfetch();
         fundfetch();
@@ -152,7 +187,8 @@
     }
 
     function getcode(d) {
-        var guess = guessAreaCode(d['PANCHAYAT'], currMap.slice(0,1).toUpperCase());
+        // console.log(d['PANCHAYAT']);
+        var guess = guessAreaCode(d.properties['PANCHAYAT'], currMap.slice(0,1).toUpperCase());
         if(guess!="FAIL"){
             return guess
         }
@@ -305,22 +341,19 @@
     };
 
     function fundrender(){
-        console.log("currMap is " + currMap);
-        console.log(funds[currMap]);
-        var infralist = funds[currMap][currPlace][0];
-        infralist.unshift('Infrastructure');
-        var prodlist = funds[currMap][currPlace][1];
-        prodlist.unshift('Productive');
-        var servlist = funds[currMap][currPlace][2];
-        servlist.unshift('Service');
+        // console.log("currMap is " + currMap);
+        // console.log(funds[currMap]);
+        var fundAllocated = funds[currMap][currPlace];
+        var lists = [["Infrastructure"],["Productive"],["Service"]];
+        for (var year = 0; year < fundAllocated.length; year++){
+            for (var listNum = 0; listNum < 3; listNum++) {
+                lists[listNum].push(fundAllocated[year][listNum]);
+            }
+        }
         var chart = c3.generate({
             bindto: '#fundChart',
             data: {
-                columns: [
-                    infralist,
-                    prodlist,
-                    servlist
-                ],
+                columns: lists,
                 types: {
                     Infrastructure: 'bar',
                     Productive: 'bar',
@@ -330,7 +363,7 @@
             axis: {
                 x: {
                     type: 'category',
-                    categories: ['2012', '2013', '2014']
+                    categories: ['2012-13', '2013-14', '2014-15', '2015-16']
                 },
                 y: {
                     label: {
@@ -347,7 +380,7 @@
         if(populations[code]){
             var info = populations[code];
         } else {
-            console.log('undefined pop');
+            // console.log('undefined pop');
             var info = 'Could not find data';
         }
         return 'population = '+info['total'];
@@ -363,16 +396,19 @@
         //         }
         //     }
         // });
+        if(areaName && areaName.length <= 4) {
+            return areaName;
+        }
         if (reverseCodes[areaType + areaName] != undefined) {
             return reverseCodes[areaType + areaName];
         } else {
-            console.log('failed to find ' + areaName + ' in codes');
+            // console.log('failed to find ' + areaName + ' in codes');
             return "FAIL";
         }
     }
 
     document.addEventListener('gpmaploaded', function(e) {
-        console.log('event fired. Map will be created');
+        // console.log('event fired. Map will be created');
         mapcreator(maps[currMap+currYear]);
         $('.loading').hide();
         $('.content').show();
