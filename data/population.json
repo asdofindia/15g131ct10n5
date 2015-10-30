@@ -600,7 +600,7 @@
     "sexratio": 1107
   },
   {
-    "lsgi_code": "G_AN",
+    "lsgi_code": "G_VN",
     "pname": "Vanimel Grama Panchayat",
     "total": 25412,
     "male": 12300,
@@ -622,5 +622,104 @@
     "male": 15948,
     "female": 18554,
     "sexratio": 1164
+  },
+  {
+    "lsgi_code": "B_BA",
+    "male": 81130,
+    "female": 89062,
+    "sexratio": 1098,
+    "total": 170192
+  },
+  {
+    "lsgi_code": "B_CL",
+    "male": 88963,
+    "female": 98382,
+    "sexratio": 1106,
+    "total": 187345
+  },
+  {
+    "lsgi_code": "B_KL",
+    "male": 148654,
+    "female": 159920,
+    "sexratio": 1076,
+    "total": 308574
+  },
+  {
+    "lsgi_code": "B_KD",
+    "male": 97681,
+    "female": 103278,
+    "sexratio": 1058,
+    "total": 200959
+  },
+  {
+    "lsgi_code": "B_KM",
+    "male": 148633,
+    "female": 153575,
+    "sexratio": 1034,
+    "total": 302208
+  },
+  {
+    "lsgi_code": "B_KU",
+    "male": 64125,
+    "female": 70973,
+    "sexratio": 1107,
+    "total": 135098
+  },
+  {
+    "lsgi_code": "B_ME",
+    "male": 51126,
+    "female": 59040,
+    "sexratio": 1155,
+    "total": 110166
+  },
+  {
+    "lsgi_code": "B_PA",
+    "male": 64180,
+    "female": 60591,
+    "sexratio": 945,
+    "total": 124771
+  },
+  {
+    "lsgi_code": "B_PE",
+    "male": 84251,
+    "female": 91972,
+    "sexratio": 1092,
+    "total": 176223
+  },
+  {
+    "lsgi_code": "B_TH",
+    "male": 57130,
+    "female": 64795,
+    "sexratio": 1135,
+    "total": 121925
+  },
+  {
+    "lsgi_code": "B_TU",
+    "male": 74102,
+    "female": 85141,
+    "sexratio": 1149,
+    "total": 159243
+  },
+  {
+    "lsgi_code": "B_VD",
+    "male": 60595,
+    "female": 73981,
+    "sexratio": 1221,
+    "total": 134576
+  },
+  {
+    "lsgi_code": "D_KD",
+    "male": 1020570,
+    "female": 1110710,
+    "sexratio": 1089,
+    "total": 2131280
+  },
+  {
+    "lsgi_code": "G_EL",
+    "merged": "Kozhikkode"
+  },
+  {
+    "lsgi_code": "G_BE",
+    "merged": "Kozhikkode"
   }
 ]

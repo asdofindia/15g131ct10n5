@@ -16,18 +16,57 @@ path.area.disabled:hover {
     fill: grey;
 }
 
-button.selectedChooser {
-    background-color: blue;
+path.area.selectedArea {
+    fill: darkblue;
 }
 
-.fund {
-    min-height: 500px;
+/*button.btn-primary.selectedChooser {
+    background-color: black;
+}*/
+
+.areaInfo {
+    margin-top: 50px;
+    background-color: cyan;
+    border-radius: 10px;
 }
+
+@media (min-width:1335px) {
+
+    .fund {
+        postion: relative;
+        top: -300px;
+    }
+
+    #fundRow {
+        height: 10px;
+    }
+
+    /*#attributionRow {
+        position: relative;
+        top: -300px;
+    }*/
+}
+
+
+#fundHead {
+    display: none;
+}
+/*.fund {
+    min-height: 500px;
+}*/
 
 #fundChart .c3-line {
     stroke-width: 3px;
 }
 
+#disclaimer {
+    padding-top: 100px;
+}
+
+#attribute {
+    padding-top: 100px;
+    padding-bottom: 500px;
+}
 
 /* tips css */
 .tipsy { font-size: 10px; position: absolute; padding: 5px; z-index: 100000; }

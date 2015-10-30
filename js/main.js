@@ -180,10 +180,38 @@
     }
 
     function setAreaInfo() {
-        // d3.select('.areaInfo').text(currPlace+'<br>'+getAreaInfo(currPlace));
-        d3.select('#areaNameEn').text(codes[currPlace]["en"][0]);
+        var data = getAreaInfo(currPlace);
+        var placeTypeName = '';
+        switch (currPlace.slice(0,1)) {
+            case 'M':
+                if(currPlace.indexOf('KD') > -1) {
+                    placeTypeName = "Corporation";
+                } else {
+                    placeTypeName = "Municipality";
+                }
+                break;
+            case 'G':
+                placeTypeName = "Village Panchayat";
+                break;
+            case 'B':
+                placeTypeName = 'Block Panchayat';
+                break;
+            case 'D':
+                placeTypeName = 'District Panchayat';
+                break;
+            default:
+                placeTypeName = '';
+        }
+        d3.select('#areaNameEn').text(codes[currPlace]["en"][0] + " " + placeTypeName);
         d3.select('#areaNameMl').text(codes[currPlace]["ml"][0]);
-        d3.select('#population').text(getAreaInfo(currPlace));
+        if (data.merged){
+            d3.select('#population').text("Got merged to Kozhikode corporation after 2005");
+            d3.select('#sexratio').text("");
+        } else {
+            d3.select('#population').text("Population: " + data.total);
+            d3.select('#sexratio').text("Sex Ratio: "+ data.sexratio + " (women per 1000 men)")
+        }
+
     }
 
     function getcode(d) {
@@ -228,7 +256,7 @@
                     'font': 'verdana'
                 },
                 'subtitle': {
-                    'text': 'TOTAL SEATS WON BY EACH PARTY',
+                    'text': 'TOTAL SEATS WON BY EACH PARTY\nരാഷ്ട്രീയകക്ഷികള്‍ക്കു് കിട്ടിയ സീറ്റുകള്‍ ',
                     'color': '#999999',
                     'fontSize': 10,
                     'font': 'verdana'
@@ -236,8 +264,8 @@
                 'titleSubtitlePadding': 12
             },'footer': {
                 'text': 'TOTAL : '+totalseats.toString(),
-                'color': '#999999',
-                'fontSize': 11,
+                'color': '#000',
+                'fontSize': 16,
                 'font': 'open sans',
                 'location': 'bottom-center'
             },
@@ -267,13 +295,15 @@
                     'font': 'verdana'
                 },
                 'percentage': {
-                    'color': '#e1e1e1',
+                    // 'color': '#e1e1e1',
+                    'color': '#000',
                     'font': 'verdana',
                     'decimalPlaces': 0
                 },
                 'value': {
-                    'color': '#e1e1e1',
-                    'font': 'verdana'
+                    'color': '#000',
+                    'font': 'verdana',
+                    'fontSize': 15
                 },
                 'lines': {
                     'enabled': true,
@@ -301,6 +331,12 @@
                 }
             }
         });
+
+        // this is also the ideal time to set the selection on path.
+        // $('.selectedArea').removeClass('selectedArea');
+        // $('path#' + currPlace).addClass('selectedArea');
+        d3.select('.selectedArea').classed('selectedArea', false);
+        d3.select('#'+currPlace).classed('selectedArea', true);
     };
 
     function partyColor(party){
@@ -352,6 +388,9 @@
         }
         var chart = c3.generate({
             bindto: '#fundChart',
+            size: {
+                height: 200
+            },
             data: {
                 columns: lists,
                 types: {
@@ -367,23 +406,18 @@
                 },
                 y: {
                     label: {
-                        text: 'Fund spent (in lakhs?)',
+                        text: 'Fund allocated (in lakhs)',
                         position: 'outer-middle'
                     }
                 }
             }
         });
         // chart.load();
+        document.querySelector("#fundHead").style.display = "block";
     };
 
     function getAreaInfo(code) {
-        if(populations[code]){
-            var info = populations[code];
-        } else {
-            // console.log('undefined pop');
-            var info = 'Could not find data';
-        }
-        return 'population = '+info['total'];
+        return populations[code];
     }
 
     function guessAreaCode(areaName, areaType) {
@@ -432,9 +466,9 @@
     });
 
     function selectionUpdate(){
-        $('.selectedChooser').removeClass('selectedChooser');
-        $('.' + currYear).addClass('selectedChooser');
-        $('.' + currMap).addClass('selectedChooser');
+        $('.active').removeClass('active');
+        $('.' + currYear).addClass('active');
+        $('.' + currMap).addClass('active');
     }
 
     (function init(){
