@@ -86,6 +86,8 @@
 
     var vis = d3.select('.map').append('svg')
         .attr('width', width).attr('height', height);
+    var tooltip = d3.select(".map").append("div")
+        .attr("class", "tip");
 
     function fetchInit() {
         mapfetch(currMap, currYear);
@@ -162,6 +164,19 @@
         mapfeatures
             .exit()
                 .remove();
+
+        mapfeatures
+            .on('mousemove', function(d,i){
+                var mouse = d3.mouse(vis.node()).map( function(d) {return parseInt(d);});
+                tooltip
+                    .classed('hidden', false)
+                     .attr("style", "left:"+(mouse[0]+0)+"px;top:"+(mouse[1]-50)+"px")
+                     .html(d.properties['PANCHAYAT'])
+            })
+            .on('mouseout', function(d,i){
+                tooltip.classed("hidden", true);
+            });
+
     };
 
     function isDisabled(lsgi) {
