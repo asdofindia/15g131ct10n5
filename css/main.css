@@ -73,6 +73,8 @@ path.area.selectedArea {
     padding-bottom: 500px;
 }
 
+
+/*style for the tooltip*/
 div.tip {
     color: #222;
     background: #fff;
