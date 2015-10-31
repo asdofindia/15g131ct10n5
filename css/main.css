@@ -30,6 +30,11 @@ path.area.selectedArea {
     border-radius: 10px;
 }
 
+#areaNameEn, #areaNameMl {
+    font-size: 16px;
+    font-weight: bold;
+}
+
 @media (min-width:1335px) {
 
     .fund {
