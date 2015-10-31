@@ -42,7 +42,7 @@ path.area.selectedArea {
 
     .fund {
         postion: relative;
-        top: -241px
+        top: -241px;
         background-color: #F8F8F8;
         left: 2%;
         border-radius: 10px;
