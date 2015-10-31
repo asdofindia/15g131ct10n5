@@ -459,6 +459,9 @@
         hideAreaStuff();
         var classes = this.className.split(' ');
         var maptype = classes[classes.length - 1];
+        if (maptype == "active") {
+            return ;
+        }
         currMap = maptype;
         selectionUpdate();
         mapfetch(currMap, currYear);
@@ -467,6 +470,9 @@
         e.preventDefault();
         var classes = this.className.split(' ');
         var mapyear = classes[classes.length - 1];
+        if (mapyear == "active"){
+            return;
+        }
         currYear = mapyear;
         selectionUpdate();
         mapfetch(currMap, currYear);
