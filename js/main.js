@@ -26,6 +26,11 @@
     var currYear = '2010';
     var currPlace = null;
 
+    // change random to empty string when site is complete
+    // var random = '';
+    var random = '?' + Math.floor(Math.random() * 1000);
+
+
     function mapfetch(maptype, mapyear) {
         var mapname = maptype + mapyear;
         if(maps[mapname]){
@@ -33,7 +38,7 @@
             document.dispatchEvent(maploadevent);
         } else {
             showLoading();
-            d3.json('data/maps/' + mapyear + '/' + maptype + '.geojson' + '?' + Math.floor(Math.random() * 1000), function(d) {
+            d3.json('data/maps/' + mapyear + '/' + maptype + '.geojson' + random, function(d) {
                 maps[mapname] = d;
                 var maploadevent = new CustomEvent('gpmaploaded');
                 document.dispatchEvent(maploadevent);
@@ -46,7 +51,7 @@
         if(results[resultname]){
             resultPi();
         } else {
-            d3.csv('data/results/' + currYear + '/' + currMap + '.csv' + '?' + Math.floor(Math.random() * 1000), function(d){
+            d3.csv('data/results/' + currYear + '/' + currMap + '.csv' + random, function(d){
                 results[resultname] = {};
                 // console.log(d);
                 for(var i = 0; i < d.length; i++) {
@@ -70,7 +75,7 @@
         if(funds[currMap]){
             fundrender();
         } else {
-            d3.json('data/funds/' + currMap + '.json' + '?' + Math.floor(Math.random() * 1000), function(d){
+            d3.json('data/funds/' + currMap + '.json' + random, function(d){
                 // console.log(d);
                 funds[currMap] = d;
                 // console.log(funds[currMap]);
@@ -84,12 +89,12 @@
 
     function fetchInit() {
         mapfetch(currMap, currYear);
-        d3.json('data/population.json' + '?' + Math.floor(Math.random() * 1000), function(d) {
+        d3.json('data/population.json' + random, function(d) {
             for (var i = 0; i < d.length; i++) {
                 populations[d[i]['lsgi_code']] = d[i];
             }
         });
-        d3.json('data/codes.json' + '?' + Math.floor(Math.random() * 1000), function(d){
+        d3.json('data/codes.json' + random, function(d){
             codes = d;
             for(var code in codes) {
                 var englishnames = codes[code]["en"];
