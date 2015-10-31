@@ -1,23 +1,28 @@
+.map {
+    background-color: #F8F8F8;
+    padding-right: 37%;
+    border-radius: 10px;
+}
 path.area {
-    fill: cyan;
+    fill: #6BE4D9;
     stroke: #000;
     pointer-events: all;
 }
 
 path.area:hover {
-    fill: blue;
+    fill: #DAFBF8;
 }
 
 path.area.disabled {
-    fill: grey;
+    fill: #50A4ED;
 }
 
 path.area.disabled:hover {
-    fill: grey;
+    fill: #50A4ED;
 }
 
 path.area.selectedArea {
-    fill: darkblue;
+    fill: #337AB7;
 }
 
 /*button.btn-primary.selectedChooser {
@@ -25,21 +30,22 @@ path.area.selectedArea {
 }*/
 
 .areaInfo {
-    margin-top: 50px;
-    background-color: cyan;
+    margin-left: 1%;
+    background-color: #F8F8F8;
     border-radius: 10px;
-}
-
-#areaNameEn, #areaNameMl {
     font-size: 16px;
     font-weight: bold;
+    font-family: "Times New Roman", Georgia, Serif;
 }
 
 @media (min-width:1335px) {
 
     .fund {
         postion: relative;
-        top: -300px;
+        top: -241px
+        background-color: #F8F8F8;
+        left: 2%;
+        border-radius: 10px;
     }
 
     #fundRow {
