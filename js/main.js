@@ -32,6 +32,7 @@
             var maploadevent = new CustomEvent('gpmaploaded');
             document.dispatchEvent(maploadevent);
         } else {
+            showLoading();
             d3.json('data/maps/' + mapyear + '/' + maptype + '.geojson' + '?' + Math.floor(Math.random() * 1000), function(d) {
                 maps[mapname] = d;
                 var maploadevent = new CustomEvent('gpmaploaded');
@@ -172,6 +173,7 @@
         if (isDisabled(d.properties['lsgi_code'])) {
             return;
         }
+        showAreaStuff();
         currPlace = getcode(d);
         // console.log("setting currPlace as " + currPlace);
         setAreaInfo();
@@ -449,6 +451,7 @@
     });
     $('.mapchooser').on('click', function(e){
         e.preventDefault();
+        hideAreaStuff();
         var classes = this.className.split(' ');
         var maptype = classes[classes.length - 1];
         currMap = maptype;
@@ -469,6 +472,23 @@
         $('.active').removeClass('active');
         $('.' + currYear).addClass('active');
         $('.' + currMap).addClass('active');
+    }
+
+    function showLoading() {
+        $('.loading').show();
+        $('.content').hide();
+    }
+
+    function hideAreaStuff(){
+        $('.areaInfo').hide();
+        $('#pieChart').hide();
+        $('#fundRow').hide();
+    }
+
+    function showAreaStuff() {
+        $('.areaInfo').show();
+        $('#pieChart').show();
+        $('#fundRow').show();
     }
 
     (function init(){
