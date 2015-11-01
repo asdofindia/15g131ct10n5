@@ -541,6 +541,16 @@
         $('#fundRow').show();
     }
 
+    $('#disclaimerButton').on('click', function(){
+        $('#attribute').hide();
+        $('#disclaimerText').show();
+    });
+
+    $('#disclaimerClose').on('click', function(){
+        $('#attribute').show();
+        $('#disclaimerText').hide();
+    });
+
     // this is the first function that is called
     (function init(){
         $('.content').hide();

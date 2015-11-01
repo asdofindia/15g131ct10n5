@@ -46,10 +46,10 @@ path.area.selectedArea {
 @media (min-width:1335px) {
 
     .fund {
-        postion: relative;
-        top: -241px;
+        /*postion: relative;*/
+        margin-top: -241px;
         background-color: #F8F8F8;
-        left: 2%;
+        left: 5%;
         border-radius: 10px;
     }
 
@@ -75,15 +75,38 @@ path.area.selectedArea {
     stroke-width: 3px;
 }
 
-#disclaimer {
-    padding-top: 100px;
+#attribute, #disclaimerText {
+    margin-top: -5px;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    background: #F8F8F8;
+    text-align: center;
+    min-height: 30px;
 }
 
-#attribute {
-    padding-top: 100px;
-    padding-bottom: 500px;
+#disclaimerText {
+    display: none;
 }
 
+#licenseText {
+    float: left;
+    margin-left: 20px;
+}
+
+#disclaimerButton {
+    float: right;
+    margin-right: 20px;
+    cursor: grab;
+    text-decoration: none;
+}
+
+#disclaimerClose {
+    float: right;
+    right: 0;
+    top: 0;
+    cursor: grab;
+    text-decoration: none;
+}
 
 /*style for the tooltip*/
 div.tip {
