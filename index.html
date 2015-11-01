@@ -70,37 +70,36 @@
         <progress></progress>
     </div>
     <div class="content">
-        <div class="row">
-            <div class="col-md-6">
-                <button class="btn btn-primary mapchooser gp" type="submit" title="പ്രാദേശിക അധികാരികള്‍">Local Authorities</button>
-                <button class="btn btn-primary mapchooser bp" type="submit" title="ബ്ലോക്കു് പഞ്ചായത്തുകള്‍">Block Panchayats</button>
-                <button class="btn btn-primary mapchooser dp" type="submit" title="ജില്ലാ പഞ്ചായത്തു്">District Panchayat</button>
-                <!-- <button class="btn btn-primary mapchooser mp" type="submit">Municipalities & Corporation</button> -->
+        <div class="row" id="graphics">
+            <div class="col-md-5">
+                <ul class="nav nav-tabs">
+                    <li role="presentation" class="mapchooser gp"><a href="#" title="പ്രാദേശിക അധികാരികള്‍">Local Authorities</a></li>
+                    <li role="presentation" class="mapchooser bp"><a href="#" title="ബ്ലോക്കു് പഞ്ചായത്തുകള്‍">Block Panchayats</a></li>
+                    <li role="presentation" class="mapchooser dp"><a href="#" title="ജില്ലാ പഞ്ചായത്തുകള്‍">District Panchayats</a></li>
+                </ul>
+                <div class="map"></div>
             </div>
-            <div class="col-md-3 col-md-offset-3">
-                <button type="submit" class="btn btn-primary yearchooser 2005">2005</button>
-                <button type="submit" class="btn btn-primary yearchooser 2010">2010</button>
-                <!-- <button type="submit" class="btn btn-primary yearchooser 2015">2015</button> -->
+            <div class="col-md-3">
+                <div class="areaInfo">
+                    <div id="areaNameEn"></div>
+                    <div id="areaNameMl"></div>
+                    <div id="population">Please click inside the map.
+                        <br>ഭൂപടത്തിനുള്ളില്‍ ഞെക്കിയാലും</div>
+                    <div id="sexratio"></div>
+                    <div class="space"></div>
+                    <h4 id="fundHead">Fund Allocated വകയിരുത്തിയ ഫണ്ട്</h4>
+                    <div id="fundChart"></div>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="map col-md-4"></div>
-            <!-- <div class="election col-md-6"> -->
-            <div class="areaInfo col-md-3">
-                <div id="areaNameEn"></div>
-                <div id="areaNameMl"></div>
-                <div id="population">Please click inside the map.
-                    <br>ഭൂപടത്തിനുള്ളില്‍ ഞെക്കിയാലും</div>
-                <div id="sexratio"></div>
+            <div class="col-md-4">
+                <ul class="nav nav-tabs">
+                    <li role="presentation" class="yearchooser 2005"><a href="#">2005</a></li>
+                    <li role="presentation" class="yearchooser 2010"><a href="#">2010</a></li>
+                    <!-- <li role="presentation class="yearchooser 2015""><a href="#">2015</a></li> -->
+                </ul>
+                <div id="pieChart"></div>
             </div>
-            <div id="pieChart" class="col-md-3"></div>
             <!-- </div> -->
-        </div>
-        <div class="row" id="fundRow">
-            <div class="fund col-md-4 col-md-offset-4">
-                <h4 id="fundHead">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fund Allocated വകയിരുത്തിയ ഫണ്ട്</h4>
-                <div id="fundChart"></div>
-            </div>
         </div>
         <div class="row" id="attribute">
             <span id="licenseText">

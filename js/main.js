@@ -324,7 +324,7 @@
             },
             'size': {
                 'canvasHeight': 400,
-                'canvasWidth': 590,
+                'canvasWidth': 410,
                 'pieInnerRadius': '49%',
                 'pieOuterRadius': '88%'
             },
@@ -380,7 +380,7 @@
             },
             'misc': {
                 'colors': {
-                    'background': '#ffffff'
+                    'background': '#f8f8f8'
                 }
             }
         });
