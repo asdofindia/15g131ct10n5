@@ -78,29 +78,35 @@
                 <!-- <button class="btn btn-primary mapchooser mp" type="submit">Municipalities & Corporation</button> -->
             </div>
             <div class="col-md-3 col-md-offset-3">
-                <button type="submit" class="btn btn-primary yearchooser 2005">2005</button>
-                <button type="submit" class="btn btn-primary yearchooser 2010">2010</button>
+                <!-- <button type="submit" class="btn btn-primary yearchooser 2005">2005</button>
+                <button type="submit" class="btn btn-primary yearchooser 2010">2010</button> -->
                 <!-- <button type="submit" class="btn btn-primary yearchooser 2015">2015</button> -->
             </div>
         </div>
-        <div class="row">
+        <div class="row" id="graphics">
             <div class="map col-md-4"></div>
             <!-- <div class="election col-md-6"> -->
-            <div class="areaInfo col-md-3">
-                <div id="areaNameEn"></div>
-                <div id="areaNameMl"></div>
-                <div id="population">Please click inside the map.
-                    <br>ഭൂപടത്തിനുള്ളില്‍ ഞെക്കിയാലും</div>
-                <div id="sexratio"></div>
+            <div class="col-md-3">
+                <div class="areaInfo">
+                    <div id="areaNameEn"></div>
+                    <div id="areaNameMl"></div>
+                    <div id="population">Please click inside the map.
+                        <br>ഭൂപടത്തിനുള്ളില്‍ ഞെക്കിയാലും</div>
+                    <div id="sexratio"></div>
+                    <div class="space"></div>
+                    <h4 id="fundHead">Fund Allocated വകയിരുത്തിയ ഫണ്ട്</h4>
+                    <div id="fundChart"></div>
+                </div>
             </div>
-            <div id="pieChart" class="col-md-3"></div>
+            <div class="col-md-4">
+                <ul class="nav nav-tabs">
+                    <li role="presentation" class="yearchooser 2005"><a href="#">2005</a></li>
+                    <li role="presentation" class="yearchooser 2010"><a href="#">2010</a></li>
+                    <!-- <li role="presentation class="yearchooser 2015""><a href="#">2015</a></li> -->
+                </ul>
+                <div id="pieChart"></div>
+            </div>
             <!-- </div> -->
-        </div>
-        <div class="row" id="fundRow">
-            <div class="fund col-md-4 col-md-offset-4">
-                <h4 id="fundHead">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fund Allocated വകയിരുത്തിയ ഫണ്ട്</h4>
-                <div id="fundChart"></div>
-            </div>
         </div>
         <div class="row" id="attribute">
             <span id="licenseText">

@@ -5,7 +5,7 @@
 
 .map {
     background-color: #F8F8F8;
-    padding-right: 37%;
+    padding-right: 500px;
     border-radius: 10px;
 }
 path.area {
@@ -34,6 +34,10 @@ path.area.selectedArea {
     background-color: black;
 }*/
 
+#graphics {
+    background-color: #f8f8f8;
+}
+
 .areaInfo {
     margin-left: 1%;
     background-color: #F8F8F8;
@@ -43,33 +47,13 @@ path.area.selectedArea {
     font-family: "Times New Roman", Georgia, Serif;
 }
 
-@media (min-width:1335px) {
-
-    .fund {
-        /*postion: relative;*/
-        margin-top: -241px;
-        background-color: #F8F8F8;
-        left: 5%;
-        border-radius: 10px;
-    }
-
-    #fundRow {
-        height: 10px;
-    }
-
-    /*#attributionRow {
-        position: relative;
-        top: -300px;
-    }*/
+.space {
+    padding: 10px 0 10px;
 }
-
 
 #fundHead {
     display: none;
 }
-/*.fund {
-    min-height: 500px;
-}*/
 
 #fundChart .c3-line {
     stroke-width: 3px;
