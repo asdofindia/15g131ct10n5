@@ -39,6 +39,7 @@ path.area.selectedArea {
 }
 
 .areaInfo {
+    padding-top: 70px;
     margin-left: 1%;
     background-color: #F8F8F8;
     border-radius: 10px;
